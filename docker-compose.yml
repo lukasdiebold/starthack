@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    image: backend
+    container_name: backend
+    env_file:
+      - .env
+    ports:
+     - 8000:8000
+    restart: unless-stopped
+    environment:
+     - PYTHONUNBUFFERED=1
+    volumes:
+     - /etc/letsencrypt:/etc/letsencrypt
+
+  frontend:
+    build:
+      context: ./frontend
+    image: frontend
+    container_name: frontend
+    env_file:
+      - .env
+    ports:
+     - 3000:3000
+    restart: unless-stopped
+
